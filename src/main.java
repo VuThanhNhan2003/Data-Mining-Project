@@ -18,6 +18,7 @@ public class main {
     String validation = filename + "val_data.arff";
     String validationPost = filename + "val_data_post.arff";
     ModelConfig config = null;
+    
     java.util.Scanner scanner = new java.util.Scanner(System.in);
     System.out.println("Choose a model to use: ");
     System.out.println("1. NaiveBayes");
