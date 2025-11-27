@@ -31,26 +31,6 @@ public class Model extends ModelFunctions {
     this.model = model;
   }
 
-  public void Evaluate(String filename) throws Exception {
-    // Input test set
-    setTestset(filename);
-    this.testset.setClassIndex(this.testset.numAttributes() - 1);
-    //Evaluate model by 10-fold cross-validation
-    Random rnd = new Random(1);
-    int folds = 10;
-    Evaluation eval = new Evaluation(this.trainset);
-    eval.crossValidateModel(this.model, this.testset, folds, rnd);
-
-    System.out.println("Model used: " + model.getClass().getSimpleName());
-    // Print basic evaluation metrics
-    System.out.println(
-      eval.toSummaryString("\nEvaluation\n-----------------\n", false));
-    // Print precision, recall, F1-score, and other class details
-    System.out.println(
-      eval.toClassDetailsString("\nClass Details\n-----------------\n")
-    );
-  }
-
   public void Build(String filename) throws Exception {
     // Input train set
     setTrainset(filename);
