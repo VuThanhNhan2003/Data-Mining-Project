@@ -1,0 +1,28 @@
+TASK 3: MODEL EVALUATION REPORT
+================================
+
+Dataset: 10000 instances
+Method: 10-Fold Cross-Validation (5 iterations)
+
+PERFORMANCE METRICS (Mean +/- Std)
+----------------------------------
+Metric          Naive Bayes          Random Forest       
+Accuracy        0.8000 +/- 0.0000     0.8000 +/- 0.0000
+Precision       0.6400 +/- 0.0000     0.6400 +/- 0.0000
+Recall          0.8000 +/- 0.0000     0.8000 +/- 0.0000
+F1-Score        0.7111 +/- 0.0000     0.7111 +/- 0.0000
+
+TIME PERFORMANCE
+----------------
+Train Time      0.0669 +/- 0.0916 s     3.6678 +/- 0.1484 s
+Pred Time       0.000002 +/- 0.000001   0.000038 +/- 0.000003
+
+GENERALIZATION
+--------------
+Naive Bayes: Good stability
+Random Forest: Good stability
+
+CONCLUSION
+----------
+Best Model: Naive Bayes
+Speed Advantage: Naive Bayes is 21.4x faster
