@@ -22,6 +22,7 @@ public class main {
     String testLocationLabelPost = filename + "test_data_label_post.arff";
     String predictTestLocation = filename + "test_data_predict.arff";
     String predictTestLocationPost = filename + "test_data_predict_post.arff";
+    String validationData = filename + "val_data.arff";
     
     // data clean 
     String evaluationData = "heart_disease_clean.arff";
@@ -64,6 +65,7 @@ public class main {
       VoteModel voting = new VoteModel();
       voting.Build(trainLocation);
       System.out.println("Performance of voting");    
+      voting.Evaluate(validationData);
     }
   }
 

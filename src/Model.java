@@ -7,10 +7,8 @@ import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.meta.Vote;
-import weka.classifiers.trees.J48;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.trees.RandomForest;
-import weka.classifiers.meta.Bagging;
 import weka.core.Instances;
 import weka.core.SelectedTag;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -18,8 +16,6 @@ import weka.core.converters.ConverterUtils.DataSource;
 public class Model extends ModelFunctions {
 
   AbstractClassifier model;
-
-  private Bagging modelG;
 
   public Model(
     AbstractClassifier model,
