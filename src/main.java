@@ -14,16 +14,7 @@ import java.io.FileWriter;
 public class main {
   public static void main(String[] args) throws Exception {
     String filename = "Processing/dataset/";
-    String trainLocation = filename + "train_data.arff";
-    String trainLocationPost = filename + "train_data_post.arff";
-    String testLocation = filename + "test_data.arff";
-    String testLocationPost = filename + "test_data_post.arff";
-    String testLocationLabel = filename + "test_data_label.arff";
-    String testLocationLabelPost = filename + "test_data_label_post.arff";
-    String predictTestLocation = filename + "test_data_predict.arff";
-    String predictTestLocationPost = filename + "test_data_predict_post.arff";
-    String validationData = filename + "val_data.arff";
-    
+     
     // data clean 
     String evaluationData = "heart_disease_clean.arff";
     
@@ -32,10 +23,9 @@ public class main {
     java.util.Scanner scanner = new java.util.Scanner(System.in);
     System.out.println("Choose an option:");
     System.out.println("1. NaiveBayes");
-    System.out.println("2. DecisionTree");
-    System.out.println("3. RandomForest");
-    System.out.println("4. Voting Ensemble");
-    System.out.println("5. Model Evaluation (10-Fold CV)");
+    System.out.println("2. RandomForest");
+    System.out.println("3. Voting Ensemble");
+    System.out.println("4. Model Evaluation (10-Fold CV)");
     System.out.print("Your choice: ");
     
     int choice = scanner.nextInt();
@@ -46,15 +36,12 @@ public class main {
         config = new ModelConfig(new NaiveBayes(), "-D");
         break;
       case 2:
-        config = new ModelConfig(new J48(), "-C 0.25 -M 2");
-        break;
-      case 3:
         config = new ModelConfig(new RandomForest(), "-P 100 -I 100 -num-slots 1 -K 0 -M 1.0 -V 0.001 -S 1");
         break;
-      case 4:
+      case 3:
         config = null;
         break;
-      case 5:
+      case 4:
         runEvalution(evaluationData);
         return;
       default:
@@ -62,10 +49,22 @@ public class main {
     }
     
     if (config == null) {
-      VoteModel voting = new VoteModel();
-      voting.Build(trainLocation);
+      VoteEnsemblePipeline voting = new VoteEnsemblePipeline();
+      voting.buildEnsemble(evaluationData);
       System.out.println("Performance of voting");    
-      voting.Evaluate(validationData);
+      voting.evaluateEnsemble(evaluationData);
+    }
+    else {
+      ClassificationPipeline pipeline =
+        new ClassificationPipeline(
+                config.getModel(),
+                "",
+                config.getOptions(),
+                null
+        );
+      System.out.println("Evaluate test origin data");
+      pipeline.train(evaluationData);
+      pipeline.evaluate(evaluationData);
     }
   }
 
